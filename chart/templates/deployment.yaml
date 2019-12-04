@@ -29,9 +29,12 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: "PORT"
+              value: "{{ .Values.env.containerPort }}"
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 4000
               protocol: TCP
           livenessProbe:
             httpGet:
