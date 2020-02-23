@@ -1,10 +1,14 @@
 const express = require("express");
 const os = require("os");
-const PORT = process.env.PORT || 4000;
-const HOST = process.env.HOST || "0.0.0.0";
+const { useMongo } = require("./mongo");
+
+const port = process.env.PORT || 3000;
+const host = process.env.HOST || "0.0.0.0";
+
 const app = express();
-app.get("*", (req, res) => {
-  const hostname = os.hostname();
+const hostname = os.hostname();
+
+app.get("/", (req, res) => {
   res.json({
     data: {
       message: "hello world",
@@ -12,5 +16,16 @@ app.get("*", (req, res) => {
     }
   });
 });
-app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
+
+const mongoEnabled = parseInt(process.env.USE_MONGO) === 1;
+if (mongoEnabled) {
+  useMongo(app);
+}
+
+app.get("*", (req, res) => {
+  res.status(404).json({ error: "not found" });
+});
+
+app.listen(port, host, () => {
+  console.log(`Running on http://${host}:${port}`);
+});
