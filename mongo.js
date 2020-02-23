@@ -6,7 +6,7 @@ const useMongo = app => {
   const host = process.env.MONGO_HOST || "localhost";
   const dbName = process.env.MONGO_DB || "test";
   const collection = process.env.MONGO_COLLECTION || "data";
-  const uri = `mongodb://${host}`;
+  let uri = `mongodb://${host}`;
   if (user && pass) {
     uri = `mongodb://${user}:${pass}@${host}`;
   }
