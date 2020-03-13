@@ -13,9 +13,6 @@
   "keywords": [],
   "author": "Dongsheng Cai <d@tux.im> (http://dongsheng.org/)",
   "license": "BSD-2-Clause",
-  "bugs": {
-    "url": "https://github.com/dcai/docker-nodejs-hello-world/issues"
-  },
   "homepage": "https://github.com/dcai/docker-nodejs-hello-world#readme",
   "dependencies": {
     "express": "^4.17.1",
